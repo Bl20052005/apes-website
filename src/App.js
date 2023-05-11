@@ -147,21 +147,19 @@ function ImageExpanded({images, text, addedClass, id, title, expandedText, score
     if(fullscreen) {
         return(
             <div style={{"height" : "0", "width": "0"}}>
-            <div className={"image-expanded-container-expanded"} id={"image-expanded-container-expanded" + id}>
-                <div className="navbar">
-                    <div className="navbar-1" onClick={() => changeText(1)}>{navs[0]}</div>
-                    <div className="navbar-2" onClick={() => changeText(2)}>{navs[1]}</div>
-                    <div className="navbar-3" onClick={() => changeText(3)}>{navs[2]}</div>
+                <div className={"image-expanded-container-expanded"} id={"image-expanded-container-expanded" + id}>
+                    <div className="navbar">
+                        <div className="navbar-1" onClick={() => changeText(1)}>{navs[0]}</div>
+                        <div className="navbar-2" onClick={() => changeText(2)}>{navs[1]}</div>
+                        <div className="navbar-3" onClick={() => changeText(3)}>{navs[2]}</div>
+                    </div>
+                    <img src="https://static.thenounproject.com/png/1268891-200.png" alt="expand" className="shrink-icon" onClick={() => changeFromFull()}/>
+                    <img className="image-text-image expanded-image" src={images}/>
+                    <div className="image-expanded-line"></div>
+                    <h1 className="image-title">{curTitle}</h1>
+                    <ImageExpandedDescription isQuiz={isQuiz} curDescription={curDescription} id={id} quizMaterial={quizMaterial} setQuizMaterial={setQuizMaterial} score={score}  setScore={setScore}/>
                 </div>
-                <img src="https://static.thenounproject.com/png/1268891-200.png" alt="expand" className="shrink-icon" onClick={() => changeFromFull()}/>
-                <img className="image-text-image expanded-image" src={images}/>
-                <div className="image-expanded-line"></div>
-                <h1 className="image-title">{curTitle}</h1>
-                <ImageExpandedDescription isQuiz={isQuiz} curDescription={curDescription} id={id} quizMaterial={quizMaterial} setQuizMaterial={setQuizMaterial} score={score}  setScore={setScore}/>
             </div>
-            </div>
-            
-            
         );
     } else {
         return(
@@ -200,9 +198,48 @@ function Options({images, text, title, expandedText, score, setScore}) {
     );
 }
 
-function Dropdown() {
+function Dropdown({setScore, setImages, setText, setTitle, setExpandedText}) {
+
+    const resetAll = () => {
+        setScore(["-", "-"]);
+        setImages([
+            "https://www.priyamstudycentre.com/wp-content/uploads/2022/12/Non-renewable-energy-resources-crude-oil-coal-natural-gas-and-nuclear-fuel.png",
+            "https://static.seekingalpha.com/cdn/s3/uploads/getty_images/1185308131/image_1185308131.jpg?io=getty-c-crop-4-3",
+            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2022/03/crude_oil_investing.jpeg.jpg",
+            "https://whyy.org/wp-content/uploads/2019/10/bigstock-The-gas-is-burning-the-gas-st-307682305.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/2/24/2011-05-10_18-57-46_Switzerland_-_Wil_crop.jpg"
+        ]);
+        setText(["So, what exactly is non-renewable energy? Expand to learn more!", "Coal: the energy that came from plants millions of years ago, expand to learn more!", "Oil: the energy that runs the world, expand to learn more!", "Natural gas: a cleaner burning fuel? Expand to learn more!", "Nuclear: a better alternative? Expand to learn more!"]);
+        setTitle([["What is non-renewable energy?", "What are the effects of non-renewable energy?", "Quiz!"], 
+        ["What is coal?", "What are the effects of coal?", "Quiz!"], 
+        ["What is oil?", "What are the effects of oil?", "Quiz!"],
+        ["What is natural gas?", "What are the effects of natural gas?", "Quiz!"],
+        ["What is nuclear energy?", "What are the effects of nuclear power?", "Quiz!"],
+        ["Description", "Effects", "Quiz"]]);
+        setExpandedText([["Non-renewable energy is most commonly associated with fossil fuels, but it also includes nuclear energy. It is \"non-renewable\" because the energy sources were built up from millions and billions of years of progress; far slower than our speed of usage.",
+        "Non-renewables are mostly not sustainable in the long run. They often produce harmful byproducts and contribute to harmful pollution with detrimental effects on human health.",
+        ["Why is non-renewable energy \"non-renewable\"?", "Because it is energy from the Sun", "Because it uses living organisms as a power sources", "Because we use it far too quickly for it to replenish back", "Because we use it far too slowly to completely exhaust it", ["Because we use it far too quickly for it to replenish back", 3]]],
+        
+        ["Coal comes from dead plants from millions of years ago, and it is one of the most common non-renewable sources of energy currently used. There are three main types of coal: anthracite, lignite, and bituminous coal. Despite its non-renewable status and toxic aftereffects, it is used to generate almost 30% of global energy today.",
+        "Coal releases carbon dioxide, which contributes to climate change and global warming. It also releases neurotoxins such as lead and mercury that can disrupt communications with the brain and body, causing paralysis and often organ failures.",
+        ["Which of these is not a type of coal?", "Lignite", "Anthracite", "Bituminous", "Andesite", ["Andesite", 4]]],
+        
+        ["Oil comes from dead animals from millions of years ago, and in addition to being a substantial energy source, it is also used to make many products we use in our everyday lives like plastic. Oil is extracted using drills and pumps both onland and offshore, and it accounts for around 30% of the world's energy use.",
+        "Oil, like coal, also produces carbon dioxide as well as amounts of nitrogen and sulfur oxides. It also produces particulates, which can cause lung cancer and other respiratory complications.",
+        ["What % of the world's energy comes from oil?", "~40%", "~30%", "~20%", "~10%", ["~30%", 2]]],
+        
+        ["Natural gas accounts for around 20% of the world's energy sources. It is obtained by fracking, a process similar to drilling except that water, sand, and other chemicals are pressurized down a tube to break up rock formation, allowing natural gas to escape. The largest component in natural gas is methane gas (CH4)",
+        "Natural gas releases carbon dioxide, but otherwise does not release significant toxic compounds, effectively making them cleaner than coal and oil. However, the fracking process itself can have unintended consequences as the methane in natural gas can escape into the atmosphere, becoming greenhouse gasses, and fracking can also increase the chance for earthquakes",
+        ["What is fracking?", "pressurizing sand, water, and chemicals underground to extract natural gas", "drilling underwater using a commercial drill to extract natural gas", "Digging up soil to form a deep hole to extract natural gas", "Using a hammer to detect where natural gas deposits may be", ["pressurizing sand, water, and chemicals underground to extract natural gas", 1]]],
+        
+        ["Nuclear energy is extracted from Uranium using controlled fission reactions. Using free neutrons, an uranium atom can be split into two, releasing more neutrons to split even more uranium atoms. This process releases an incredible amount of energy from little material and although non-renewable, it has a huge amount of potential.",
+        "Nuclear energy releases no toxic gasses, no carbon dioxide, and no neurotoxins. However, it does release radioactive waste, which if not properly contained can cause disastrous consequences on human health such as cancer. Radioactive waste must be properly stored and buried for tens of thousands of years.",
+        ["What reaction does nuclear energy use?", "fracking", "fusion", "fission", "forex", ["fission", 3]]]
+        ]);
+    }
+
     return(
-        <div hidden={true}>
+        <div onClick={() => resetAll()}>
             <p>Move onto next module?</p>
         </div>
     );
@@ -250,7 +287,7 @@ function App() {
             <h2 id="title">Module 1: Biodiversity</h2>
             <Score score={score} />
             <Options images={images} text={text} title={title} expandedText={expandedText} score={score} setScore={setScore}/>
-            <Dropdown setScore={setScore} setImages={setImages} setText={setText}/>
+            <Dropdown setScore={setScore} setImages={setImages} setText={setText} setTitle={setTitle} setExpandedText={setExpandedText}/>
         </div>
     );
 }
