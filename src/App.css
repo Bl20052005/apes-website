@@ -1,8 +1,96 @@
+@media only screen and (min-width: 1001px) {
+    .outer-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .image-text-image {
+        width: 80px;
+        height: 80px;
+        margin: 10px 5px 5px 10px;
+    }
+
+    .image-text {
+        font-size: 19px;
+    }
+
+    #line {
+        height: 20px;
+    }
+
+    #score{
+        top: 1%;
+    }
+
+    .image-expanded-container {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 681px) and (max-width: 1000px) {
+    .outer-circle {
+        width: 75px;
+        height: 75px;
+    }
+
+    .image-text-image {
+        width: 50px;
+        height: 50px;
+        margin: 0 5px 0 0;
+    }
+
+    .image-text {
+        font-size: 16px;
+    }
+
+    #line {
+        height: 15px;
+    }
+
+    #score{
+        top: 1%;
+    }
+
+    .image-expanded-container {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .outer-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .image-text-image {
+        width: 0px;
+        height: 0px;
+        visibility: hidden;
+    }
+
+    .image-text {
+        font-size: 14px;
+    }
+
+    #line {
+        height: 10px;
+    }
+
+    #score{
+        bottom: 1%;
+    }
+
+    .image-expanded-container {
+        width: 50%;
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: rgb(96, 185, 84);
+    overflow-x: hidden;
 }
 
 #app {
@@ -18,13 +106,39 @@ body {
     grid-template-rows: 2fr 1fr 2fr;
 }
 
+@keyframes display-line {
+    from {
+        width: 0;
+    } to {
+        width: 100%;
+    }
+}
+
+@keyframes display-images {
+    0% {
+        opacity: 0;
+        transform: rotate(0) scale(0);
+    }
+    50% {
+        opacity: 0;
+        transform: rotate(0) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(3turn) scale(1);
+    }
+}
+
 #line {
     grid-column: 1 / 8;
     grid-row: 2 / 3;
-    height: 20px;
+    width: 100%;
     align-self: center;
     border-radius: 10px;
     background-color: rgb(142, 255, 127);
+    border: 2px solid rgb(29, 150, 29);
+    animation-name: display-line;
+    animation-duration: 2.5s;
 }
 
 .image-container {
@@ -32,6 +146,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    animation-name: display-images;
+    animation-duration: 5s;
 }
 
 #image-container-1 {
@@ -57,8 +173,6 @@ body {
 .outer-circle {
     grid-row: 2 / 3;
     grid-column: 2 / 3;
-    width: 100px;
-    height: 100px;
     justify-self: center;
     align-self: center;
     background-color: rgb(29, 150, 29);
@@ -115,7 +229,6 @@ body {
 
 .image-expanded-container {
     position: relative;
-    width: 60%;
     height: 0px;
     max-height: 100%;
     border: 3px solid rgb(36, 165, 53);
@@ -126,7 +239,6 @@ body {
     padding: 5px;
     visibility: hidden;
     opacity: 0;
-    font-size: 19px;
     transition: opacity 0.5s, visibility 0.5s, height 0.5s;
 }
 
@@ -139,11 +251,8 @@ body {
 .image-text-image {
     display: inline;
     float: left;
-    width: 80px;
-    height: 80px;
     border: 2px solid rgb(29, 150, 29);
     border-radius: 50%;
-    margin: 10px 5px 5px 10px;
 }
 
 .image-text {
@@ -317,7 +426,6 @@ body {
 
 #score {
     position: absolute;
-    top: 1%;
     right: 2%;
     font-size: 33px;
     padding: 5px;
@@ -325,4 +433,78 @@ body {
     background-color: rgb(52, 165, 42);
     border-radius: 30px;
     border: 2px solid black;
+    animation-name: others-fade-in;
+    animation-duration: 5s;
+}
+
+#score-text {
+    margin: 0;
+    padding: 5px;
+}
+
+#switch-modules {
+    font-size: 20px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    background-color:rgb(28, 209, 109);
+    margin-top: 30px;
+    animation-name: others-fade-in;
+    animation-duration: 5s;
+}
+
+.modules:hover {
+    cursor: pointer;
+    background-color: aquamarine;
+}
+
+.module-text {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+}
+
+.modules {
+    border-bottom: 1px solid black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.5s;
+}
+
+#title {
+    font-weight: normal;
+    font-size: 45px;
+    margin: 0;
+    padding: 10px;
+    animation-name: others-fade-in;
+    animation-duration: 5s;
+    text-align: center;
+}
+
+#subtitle {
+    font-weight: normal;
+    font-size: 25px;
+    margin: 0;
+    padding: 10px;
+    animation-name: others-fade-in;
+    animation-duration: 5s;
+    text-align: center;
+}
+
+@keyframes others-fade-in {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    50% {
+        visibility: visible;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
