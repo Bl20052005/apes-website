@@ -84,7 +84,7 @@ function ImageExpandedDescription({isQuiz, curDescription, id, quizMaterial, set
                         <input type="radio" id={"quiz-answer-" + id + "-4"} name={"quiz-answer-" + id + "answer"} value={curDescription[4]} defaultChecked={quizMaterial[2][3]} disabled={quizMaterial[1]} />
                         <label htmlFor={"quiz-answer-" + id + "-4"}>{curDescription[4]}</label><br/>
                     </div>
-                    <button className="quiz-submit-button" onClick={() => evaluateQuiz(quizMaterial[0][1], curDescription[5][1])}>Submit</button>
+                    <button disabled={quizMaterial[1]} className="quiz-submit-button" onClick={() => evaluateQuiz(quizMaterial[0][1], curDescription[5][1])}>Submit</button>
                 </div>       
             </div>
         )

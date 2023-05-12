@@ -340,7 +340,7 @@ body {
     z-index: 2;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 25px 65px 10px 0.5fr 3.5fr;
+    grid-template-rows: 25px 65px 10px 0.3fr 3.5fr;
     justify-items: center;
     align-items: center;
     animation-name: image-expanded;
@@ -408,6 +408,8 @@ body {
     grid-column: 1 / 6;
     grid-row: 4 / 5;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .image-expanded-description {
@@ -427,6 +429,8 @@ body {
 }
 
 .quiz-title {
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
